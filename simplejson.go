@@ -171,6 +171,20 @@ func (j *Json) CheckGet(key string) (*Json, bool) {
 	return nil, false
 }
 
+// CheckGetPath returns a pointer to a new `Json` object and
+// a `bool` identifying success or failure
+func (j *Json) CheckGetPath(branch ...string) (*Json, bool) {
+	jin := j
+	var ok bool
+	for _, p := range branch {
+		jin, ok = jin.CheckGet(p)
+		if !ok {
+			return nil, false
+		}
+	}
+	return jin, true
+}
+
 // Map type asserts to `map`
 func (j *Json) Map() (map[string]interface{}, error) {
 	if m, ok := (j.data).(map[string]interface{}); ok {

@@ -35,6 +35,15 @@ func TestSimplejson(t *testing.T) {
 	_, ok = js.CheckGet("missing_key")
 	assert.Equal(t, false, ok)
 
+	_, ok = js.CheckGetPath("test", "string_array")
+	assert.Equal(t, true, ok)
+
+	_, ok = js.CheckGetPath("test", "missing_key")
+	assert.Equal(t, false, ok)
+
+	_, ok = js.CheckGetPath("missing_key", "missing_key")
+	assert.Equal(t, false, ok)
+
 	aws := js.Get("test").Get("arraywithsubs")
 	assert.NotEqual(t, nil, aws)
 	var awsval int
