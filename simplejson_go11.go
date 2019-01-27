@@ -11,8 +11,8 @@ import (
 	"strconv"
 )
 
-// Implements the json.Unmarshaler interface.
-func (j *Json) UnmarshalJSON(p []byte) error {
+// Implements the json.Decode interface.
+func (j *Json) StreamDecodeJSON(p []byte) error {
 	dec := json.NewDecoder(bytes.NewBuffer(p))
 	dec.UseNumber()
 	return dec.Decode(&j.data)

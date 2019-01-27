@@ -17,11 +17,6 @@ func NewFromReader(r io.Reader) (*Json, error) {
 	return j, err
 }
 
-// Implements the json.Unmarshaler interface.
-func (j *Json) UnmarshalJSON(p []byte) error {
-	return json.Unmarshal(p, &j.data)
-}
-
 // Float64 coerces into a float64
 func (j *Json) Float64() (float64, error) {
 	switch j.data.(type) {

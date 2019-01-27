@@ -458,3 +458,8 @@ func (j *Json) MustUint64(args ...uint64) uint64 {
 
 	return def
 }
+
+// Implements the json.Unmarshaler interface.
+func (j *Json) UnmarshalJSON(p []byte) error {
+	return json.Unmarshal(p, &j.data)
+}
